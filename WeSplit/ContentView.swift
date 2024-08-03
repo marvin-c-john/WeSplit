@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var billAmount = ""
     @State private var selectedPeople = "2 people"
     @State private var selectedTip = 10
+    @State private var total = 0.00
     
     var people = [2, 3, 4, 5]
     var tips = [10, 15, 20, 25, 0]
@@ -36,6 +37,12 @@ struct ContentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 } header: {
                     Text("How much tip would you like to leave?")
+                }
+                
+                
+                Section(header: Text("Total Bill")) {
+                    TextField("$\(total)", value: $total, format: .number)
+                        .disabled(true)
                 }
             }
             .navigationTitle("WeSplit")

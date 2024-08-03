@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var billAmount = ""
+    @State private var selected = "2 people"
+    
+    var people = ["2 people", "3 people", "4 people", "5 people",]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView{
+            Form{
+                TextField("Enter Bill Amount", text: $billAmount)
+                
+                Picker("Number of people", selection: $selected) {
+                    ForEach(people, id: \.self){
+                        Text($0)
+                    }
+                }
+            }
+            .navigationTitle("WeSplit")
         }
-        .padding()
     }
 }
 

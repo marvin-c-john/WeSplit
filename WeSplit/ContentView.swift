@@ -10,18 +10,29 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var billAmount = ""
-    @State private var selected = "2 people"
+    @State private var selectedPeople = "2 people"
+    @State private var selectedTip = "10%"
     
-    var people = ["2 people", "3 people", "4 people", "5 people",]
+    var people = [2, 3, 4, 5]
+    var tips = [10, 15, 20, 25, 0]
     
     var body: some View {
         NavigationView{
             Form{
                 TextField("Enter Bill Amount", text: $billAmount)
                 
-                Picker("Number of people", selection: $selected) {
+                Picker("Number of people", selection: $selectedPeople) {
                     ForEach(people, id: \.self){
-                        Text($0)
+                        Text("\($0) people")
+                    }
+                    
+                    Section("How much tip would you like to leave?") {
+                        Picker("", selection: $selectedTip) {
+                            ForEach(tips, id: \.self){
+                                Text("\($0)%")
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
                     }
                 }
             }
